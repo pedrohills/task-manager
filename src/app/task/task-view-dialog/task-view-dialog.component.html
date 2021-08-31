@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>
+    <div style="display: flex; justify-content: space-between;">
+        <span>{{ task.title }}</span>
+        <mat-chip-list>
+            <mat-chip [color]="task.finished ? 'warn' : 'primary'" [selected]="true">
+                {{ task.finished ? "Finalizada" : "Aberta" }}
+            </mat-chip>
+        </mat-chip-list>
+    </div>
+</h1>
+<div mat-dialog-content>
+    <p>
+        {{ task.description }}
+    </p>
+    <p>
+        <small><em>Criada em: {{ task.created | date: 'dd/MM/yyyy'}}</em></small>
+    </p>
+</div>
+<div mat-dialog-actions>
+    <button mat-button mat-dialog-close color="warn">Fechar</button>
+</div>
