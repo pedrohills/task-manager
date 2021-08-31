@@ -5,6 +5,7 @@ import { MatTable } from '@angular/material/table';
 import { Task } from 'src/app/shared/models/Task';
 import { TaskService } from 'src/app/shared/services/task.service';
 import { TaskDeleteDialogComponent } from '../task-delete-dialog/task-delete-dialog.component';
+import { TaskEditFormDialogComponent } from '../task-edit-form-dialog/task-edit-form-dialog.component';
 import { TaskFormDialogComponent } from '../task-form-dialog/task-form-dialog.component';
 import { TaskViewDialogComponent } from '../task-view-dialog/task-view-dialog.component';
 
@@ -49,6 +50,19 @@ export class TaskListComponent implements OnInit {
     this.dialog.open(TaskViewDialogComponent, {
       width: '700px',
       data: { task }
+    });
+  }
+
+  openTaskEditFormDialog(task: Task) {
+    let dialogRef = this.dialog.open(TaskEditFormDialogComponent, {
+      data: { task }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        this.snackbar.open('Tarefa editada com sucesso!', 'OK!');
+        this.ngOnInit();
+      }
     });
   }
 
