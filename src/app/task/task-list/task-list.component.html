@@ -1,0 +1,73 @@
+<mat-card class="container">
+    <mat-card-header>
+        <mat-card-title>Lista de Tarefas</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+
+        <mat-card class="error" *ngIf="!tasks.length">
+            <mat-card-content>Nenhuma tarefa foi adicionada até o momento.</mat-card-content>
+        </mat-card>
+
+        <mat-table [dataSource]="tasks" class="mat-elevation-z8" *ngIf="tasks.length">
+            <ng-container matColumnDef="id">
+                <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+                <mat-cell *matCellDef="let task"> {{ task.id }} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="title">
+                <mat-header-cell *matHeaderCellDef> Título </mat-header-cell>
+                <mat-cell *matCellDef="let task"> {{task.title}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="finished">
+                <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+                <mat-cell *matCellDef="let task"> {{ task.finished ? "Finalizada" : "Aberta" }} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="created">
+                <mat-header-cell *matHeaderCellDef> Data Criação </mat-header-cell>
+                <mat-cell *matCellDef="let task"> {{ task.created | date:'dd/MM/yyyy' }} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef style="justify-content: flex-end;"> Ações </mat-header-cell>
+                <mat-cell *matCellDef="let task" style="justify-content: flex-end;">
+                    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button (click)="openTaskViewDialog(task)" mat-menu-item matTooltip="Clique para visualizar" matTooltipPosition="left">
+                            <mat-icon>search</mat-icon>
+                            <span>Visualizar</span>
+                        </button>
+
+                        <div [matTooltip]="task.finished ? 'Não é possível editar uma tarefa finalizada' : 'Clique para editar'" matTooltipPosition="left">
+                            <button mat-menu-item [disabled]="task.finished">
+                                <mat-icon>edit</mat-icon>
+                                <span>Editar</span>
+                            </button>
+                        </div>
+
+                        <div [matTooltip]="task.finished ? 'Não é possível remover uma tarefa finalizada' : 'Clique para remover'" matTooltipPosition="left">
+                            <button (click)="openTaskDeleteDialog(task)" mat-menu-item [disabled]="task.finished" >
+                                <mat-icon>delete</mat-icon>
+                                <span>Remover</span>
+                            </button>
+                        </div>
+                    </mat-menu>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+    </mat-card-content>
+</mat-card>
+
+
+<div class="button-container">
+    <button (click)="openTaskFormDialog()" mat-fab color="accent" matTooltip="Clique para adicionar uma tarefa"
+        matTooltipPosition="left">
+        <mat-icon>add</mat-icon>
+    </button>
+</div>
