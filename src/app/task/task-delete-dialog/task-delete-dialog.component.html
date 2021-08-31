@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>
+    Apagar tarefa
+</h1>
+<div mat-dialog-content>
+    Você deseja realmente apagar esta tarefa?
+</div>
+<div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancelar</button>
+    <button (click)="deleteTask()" mat-raised-button color="warn">
+        <mat-icon>delete</mat-icon>
+        &nbsp;
+        <span>Apagar</span>
+    </button>
+</div>
