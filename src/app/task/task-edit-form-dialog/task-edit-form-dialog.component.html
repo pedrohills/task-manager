@@ -1,0 +1,20 @@
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <h1 mat-dialog-title>Cadastrar Tarefa</h1>
+    <div mat-dialog-content>
+        <mat-form-field appearance="outline">
+            <mat-label>Título</mat-label>
+            <input matInput formControlName="title" placeholder="Informe o título desta tarefa" required>
+            <mat-error *ngIf="title.invalid && (title.dirty || title.touched)">O campo título é obrigatório.</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Descrição</mat-label>
+            <textarea matInput placeholder="Digite a descrição desta tarefa" formControlName="description" required></textarea>
+            <mat-error *ngIf="description.invalid && (description.dirty || description.touched)">O campo descrição é obrigatório.</mat-error>
+        </mat-form-field>
+        <mat-slide-toggle color="primary" formControlName="finished">Finalizada</mat-slide-toggle>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button mat-dialog-close>Cancelar</button>
+        <button type="submit" mat-raised-button color="primary" [disabled]="formGroup.invalid">Cadastrar</button>
+    </div>
+</form>
