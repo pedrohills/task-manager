@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -22,6 +21,8 @@ import { TaskViewDialogComponent } from './task/task-view-dialog/task-view-dialo
 import { MatChipsModule } from '@angular/material/chips';
 import { TaskDeleteDialogComponent } from './task/task-delete-dialog/task-delete-dialog.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { TaskEditFormDialogComponent } from './task/task-edit-form-dialog/task-edit-form-dialog.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     TaskListComponent,
     TaskFormDialogComponent,
     TaskViewDialogComponent,
-    TaskDeleteDialogComponent
+    TaskDeleteDialogComponent,
+    TaskEditFormDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,10 +49,16 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatSnackBarModule,
     MatFormFieldModule,
     ReactiveFormsModule,
+    MatSlideToggleModule,
     BrowserAnimationsModule,
   ],
   providers: [TaskService],
-  entryComponents: [TaskFormDialogComponent, TaskViewDialogComponent, TaskDeleteDialogComponent],
+  entryComponents: [
+    TaskFormDialogComponent,
+    TaskViewDialogComponent,
+    TaskDeleteDialogComponent,
+    TaskEditFormDialogComponent,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
