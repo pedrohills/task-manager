@@ -42,7 +42,7 @@
                         </button>
 
                         <div [matTooltip]="task.finished ? 'Não é possível editar uma tarefa finalizada' : 'Clique para editar'" matTooltipPosition="left">
-                            <button mat-menu-item [disabled]="task.finished">
+                            <button (click)="openTaskEditFormDialog(task)" mat-menu-item [disabled]="task.finished">
                                 <mat-icon>edit</mat-icon>
                                 <span>Editar</span>
                             </button>
